@@ -36,6 +36,7 @@ export function PostDetailScreen({ postId }: { postId: string }) {
   const commentsQuery = usePostCommentsInfinite(postId, sort);
 
   const [draft, setDraft] = useState('');
+  const [manualRefreshing, setManualRefreshing] = useState(false);
 
   const post = postQuery.data;
   const comments = useMemo(
@@ -110,8 +111,15 @@ export function PostDetailScreen({ postId }: { postId: string }) {
             ) : null}
           </View>
         }
-        refreshing={commentsQuery.isRefetching}
-        onRefresh={() => void commentsQuery.refetch()}
+        refreshing={manualRefreshing}
+        onRefresh={async () => {
+          setManualRefreshing(true);
+          try {
+            await commentsQuery.refetch();
+          } finally {
+            setManualRefreshing(false);
+          }
+        }}
       />
 
       <View style={[styles.composer, { paddingBottom: theme.spacing[10] }]}>

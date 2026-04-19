@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 export const postDetailCopy = {
   paidTitle: 'Контент скрыт по подписке',
   paidDescription: 'Доступ открывается после оплаты',
@@ -24,4 +26,4 @@ export function formatCommentsCount(count: number): string {
 
 export const POST_DETAIL_SORT_HIT_SLOP = 10;
 
-export const POST_DETAIL_KEYBOARD_EXTRA_BOTTOM = 20;
+export const POST_DETAIL_KEYBOARD_EXTRA_BOTTOM = Platform.OS === 'ios' ? 0 : 20;

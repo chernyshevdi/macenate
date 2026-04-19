@@ -4,7 +4,7 @@ import {
   Manrope_700Bold,
   useFonts,
 } from '@expo-google-fonts/manrope';
-import * as SplashScreen from 'expo-splash-screen';
+import { SplashScreen } from 'expo-router';
 import React, { useEffect, useMemo } from 'react';
 
 import { QueryClientProvider } from '@tanstack/react-query';
@@ -15,8 +15,6 @@ import { RootStoreProvider, type RootStore } from '@/stores/rootStore';
 import { SessionHydrationGate } from './SessionHydrationGate';
 import { WebSocketBridge } from './WebSocketBridge';
 import { createQueryClient } from './queryClient';
-
-void SplashScreen.preventAutoHideAsync();
 
 export function RootProviders({ children, store }: { children: React.ReactNode; store: RootStore }) {
   const queryClient = useMemo(() => createQueryClient(), []);
